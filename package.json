@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "workspaces": [
+    "example"
+  ],
+  "scripts": {
+    "start": "cd example && yarn start"
+  }
+}
