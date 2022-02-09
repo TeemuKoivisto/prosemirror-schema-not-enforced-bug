@@ -1,8 +1,8 @@
 /**
  * Modified from https://github.com/dmonad/lib0/blob/main/observable.js
  */
-export class Observable<K = string> {
-  _observers = new Map<K, Set<(args: any[]) => void>>()
+ export class Observable<K = string> {
+  _observers = new Map<K, Set<(...args: any[]) => void>>()
 
   on(key: K, cb: (...args: any[]) => void) {
     const current = this._observers.get(key)
@@ -24,9 +24,7 @@ export class Observable<K = string> {
   }
 
   emit(key: K, ...args: any[]) {
-    // TODO the typing of this annoying thing
-    // @ts-ignore
-    return Array.from((this._observers.get(key) || new Set()).values()).forEach(cb => cb(...args))
+    return Array.from((this._observers.get(key) || new Set()).values()).forEach((cb) => cb(...args))
   }
 
   destroy() {
